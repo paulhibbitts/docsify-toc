@@ -96,6 +96,9 @@ aside.nav.nothing {
     border: none;
     font-size: 1.0em;
   }
+  .page_toc:not(.open) {
+    padding-bottom: 10px;
+  }
   .nav {
     margin: 0 auto;
     width: 100%;
