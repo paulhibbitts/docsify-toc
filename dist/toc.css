@@ -18,8 +18,15 @@ aside.nav.nothing {
 }
 
 .page_toc {
+  position: -webkit-sticky;
   position: fixed;
-  top: 1.4rem;
+  overflow: auto;
+  max-height: 100vh;
+  top: 0;
+  bottom: auto;
+  margin-right: 10px;
+  scrollbar-width: thin !important;
+  scrollbar-color: grey transparent;
   border-left-style: solid;
   border-left-width: 1px;
   border-left-color: var(--border-color, rgba(0, 0, 0, 0.07));
