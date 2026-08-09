@@ -49,7 +49,7 @@ var createList = function(wrapper, count) {
 	      document.createElement('ul')
 	    );
     }
-    if (count) {
+    if (count && wrapper) {
       wrapper = wrapper.appendChild(
         document.createElement('li')
       );
@@ -80,6 +80,9 @@ var getLevel = function(header) {
 
 var jumpBack = function(currentWrapper, offset) {
   while (offset--) {
+    if (!currentWrapper.parentElement) {
+      break;
+    }
     currentWrapper = currentWrapper.parentElement;
   }
 
@@ -90,7 +93,10 @@ var buildTOC = function(options) {
   var ret = document.createElement('ul');
   var wrapper = ret;
   var lastLi = null;
-  var selector = options.scope + ' ' + options.headings
+  var selector = options.headings
+    .split(',')
+    .map(function(h) { return options.scope + ' ' + h.trim(); })
+    .join(',');
   var headers = getHeaders(selector).filter(h => h.id);
 
   headers.reduce(function(prev, curr, index) {
@@ -149,11 +155,32 @@ function plugin(hook, vm) {
 		title.innerHTML = userOptions.title;
 		title.setAttribute('class', 'title');
 
+		// Mobile-only accordion toggle; hidden and inert on desktop via CSS.
+		// No [type] attribute on purpose: some themes style any button carrying
+		// one like a pill button, which can clobber this flat bar look.
+		var toggle = document.createElement('button');
+		toggle.setAttribute('class', 'page_toc-toggle');
+		toggle.setAttribute('aria-expanded', 'false');
+		toggle.setAttribute('aria-controls', 'page_toc-panel');
+		toggle.innerHTML = userOptions.title || 'On this page';
+
+		var panel = document.createElement('div');
+		panel.id = 'page_toc-panel';
+		panel.setAttribute('class', 'page_toc-panel');
+		panel.appendChild(toc);
+
 		var container = document.createElement('div');
 		container.setAttribute('class', 'page_toc');
-		
+
+		toggle.onclick = function (e) {
+		  e.preventDefault(); // guard against accidental form submit; no [type] attr to key off of
+		  var isOpen = container.classList.toggle('open');
+		  toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+		};
+
 		container.appendChild(title);
-		container.appendChild(toc);
+		container.appendChild(toggle);
+		container.appendChild(panel);
 
     // Existing TOC
     var tocChild = document.querySelectorAll('.nav .page_toc');
