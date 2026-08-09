@@ -22,7 +22,7 @@ aside.nav.nothing {
   position: fixed;
   overflow: auto;
   max-height: 100vh;
-  top: 0;
+  top: 1.4rem;
   bottom: auto;
   margin-right: 10px;
   scrollbar-width: thin !important;
