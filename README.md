@@ -40,8 +40,3 @@ window.$docsify = {
   },
 }
 ```
-
-# TODO
-- [ ] Tests
-- [ ] Example
-- [x] ~Documentation~
