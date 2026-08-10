@@ -9,6 +9,8 @@
 
 **Note**: I won't be adding features but feel free to add pull requests and if they work/pass tests I'll add them in.
 
+This fork was created for use with my own [Docsify-This](https://github.com/hibbitts-design/docsify-this) and various Docsify Starter Kit projects.
+
 ## Changes in this fork
 
 This fork includes fixes and a mobile UX improvement on top of the original plugin:

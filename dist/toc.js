@@ -1,10 +1,12 @@
+// Modified with the assistance of Claude Code (claude.ai)
+
 var defaultOptions = {
   headings: 'h1, h2',
   scope: '.markdown-section',
 
   // To make work
-  title: 'Contents',
-  listType: 'ul',  
+  title: '',
+  listType: 'ul',
 }
 
 // Element builders
@@ -195,4 +197,13 @@ function plugin(hook, vm) {
 
 // Docsify plugin options
 window.$docsify['toc'] = Object.assign(defaultOptions, window.$docsify['toc']);
+
+// toc-headings URL param always wins, even over a site's own explicit
+// toc.headings config, so it works as a genuine override (matching how
+// toc/toc-narrow/standalone etc. already behave elsewhere in docsify-this).
+tocheadings = getURLParameterByName(['toc-headings','tocHeadings'], null, null, window.location.href, true);
+if (typeof tocheadings === 'string' && tocheadings) {
+  window.$docsify['toc'].headings = tocheadings;
+}
+
 window.$docsify.plugins = [].concat(plugin, window.$docsify.plugins);
