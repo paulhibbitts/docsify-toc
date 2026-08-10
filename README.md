@@ -19,15 +19,16 @@ This fork includes fixes and a mobile UX improvement on top of the original plug
 - **Added:** on mobile, the ToC is now a collapsible "On this page" accordion instead of an always-open list, so it no longer pushes page content down by a full screen's height before a reader reaches the article.
 
 ## To use
-Add stylesheet
+
+Download `dist/toc.css` and `dist/toc.js` from this repo and copy them into your own site (e.g. `assets/vendor/docsify-toc/`), then reference them with relative paths:
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/paulhibbitts/docsify-toc@master/dist/toc.css">
+<link rel="stylesheet" href="assets/vendor/docsify-toc/toc.css">
+```
+```html
+<script src="assets/vendor/docsify-toc/toc.js"></script>
 ```
 
-Add JS
-```html
-<script src="https://cdn.jsdelivr.net/gh/paulhibbitts/docsify-toc@master/dist/toc.js"></script>
-```
+You'll need to manually re-copy the files whenever you want to pick up updates from this repo.
 
 Add settings
 ```js
